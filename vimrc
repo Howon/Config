@@ -1,46 +1,4 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Maintainer: 
-"       Amir Salihefendic
-"       http://amix.dk - amix@amix.dk
-"
-" Version: 
-"       5.0 - 29/05/12 15:43:36
-"
-" Blog_post: 
-"       http://amix.dk/blog/post/19691#The-ultimate-Vim-configuration-on-Github
-"
-" Awesome_version:
-"       Get this config, nice color schemes and lots of plugins!
-"
-"       Install the awesome version from:
-"
-"           https://github.com/amix/vimrc
-"
-" Syntax_highlighted:
-"       http://amix.dk/vim/vimrc.html
-"
-" Raw_version: 
-"       http://amix.dk/vim/vimrc.txt
-"
-" Sections:
-"    -> General
-"    -> VIM user interface
-"    -> Colors and Fonts
-"    -> Files and backups
-"    -> Text, tab and indent related
-"    -> Visual mode related
-"    -> Moving around, tabs and buffers
-"    -> Status line
-"    -> Editing mappings
-"    -> vimgrep searching and cope displaying
-"    -> Spell checking
-"    -> Misc
-"    -> Helper functions
-"
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Sets how many lines of history VIM has to remember
@@ -61,7 +19,7 @@ let g:mapleader = ","
 " Fast saving
 nmap <leader>w :w!<cr>
 
-" :W sudo saves the file 
+" :W sudo saves the file
 " (useful for handling the permission-denied error)
 command W w !sudo tee % > /dev/null
 
@@ -73,7 +31,7 @@ command W w !sudo tee % > /dev/null
 set so=7
 
 " Avoid garbled characters in Chinese language windows OS
-let $LANG='en' 
+let $LANG='en'
 set langmenu=en
 source $VIMRUNTIME/delmenu.vim
 source $VIMRUNTIME/menu.vim
@@ -105,23 +63,23 @@ set whichwrap+=<,>,h,l
 " Ignore case when searching
 set ignorecase
 
-" When searching try to be smart about cases 
+" When searching try to be smart about cases
 set smartcase
 
 " Highlight search results
 set hlsearch
 
 " Makes search act like search in modern browsers
-set incsearch 
+set incsearch
 
 " Don't redraw while executing macros (good performance config)
-set lazyredraw 
+set lazyredraw
 
 " For regular expressions turn magic on
 set magic
 
 " Show matching brackets when text indicator is over them
-set showmatch 
+set showmatch
 " How many tenths of a second to blink when matching brackets
 set mat=2
 
@@ -139,7 +97,7 @@ set foldcolumn=1
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Enable syntax highlighting
-syntax enable 
+syntax enable
 
 try
     colorscheme desert
@@ -182,8 +140,8 @@ set expandtab
 set smarttab
 
 " 1 tab == 4 spaces
-set shiftwidth=4
-set tabstop=4
+set shiftwidth=2
+set tabstop=2
 
 " Linebreak on 500 characters
 set lbr
@@ -232,8 +190,8 @@ map <leader>h :bprevious<cr>
 map <leader>tn :tabnew<cr>
 map <leader>to :tabonly<cr>
 map <leader>tc :tabclose<cr>
-map <leader>tm :tabmove 
-map <leader>t<leader> :tabnext 
+map <leader>tm :tabmove
+map <leader>t<leader> :tabnext
 
 " Let 'tl' toggle between this and the last accessed tab
 let g:lasttab = 1
@@ -248,7 +206,7 @@ map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
 " Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
-" Specify the behavior when switching between buffers 
+" Specify the behavior when switching between buffers
 try
   set switchbuf=useopen,usetab,newtab
   set stal=2
@@ -306,7 +264,7 @@ autocmd BufWrite *.coffee :call DeleteTrailingWS()
 vnoremap <silent> gv :call VisualSelection('gv', '')<CR>
 
 " Open Ag and put the cursor in the right position
-map <leader>g :Ag 
+map <leader>g :Ag
 
 " When you press <leader>r you can search and replace the selected text
 vnoremap <silent> <leader>r :call VisualSelection('replace', '')<CR>
@@ -366,7 +324,7 @@ function! CmdLine(str)
     exe "menu Foo.Bar :" . a:str
     emenu Foo.Bar
     unmenu Foo
-endfunction 
+endfunction
 
 function! VisualSelection(direction, extra_filter) range
     let l:saved_reg = @"
@@ -431,10 +389,90 @@ Plugin 'VundleVim/Vundle.vim'
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
 Plugin 'Valloric/YouCompleteMe'
-" " All of your Plugins must be added before the following line
+
+" Cool statusbar
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+
+" Plugin to generate bash prompt line
+Bundle 'edkolev/promptline.vim'
+
+" Automatic ctags cleanup on file writes. This plugin searches parent
+" directories for any .tags files and removes stale tags.
+Plugin 'craigemery/vim-autotag'
+
+" Scroll through color schemes
+Plugin 'ScrollColors'
+
+" Syntax checking
+Plugin 'scrooloose/syntastic'
+
+" Convenient completion for XML/HTML
+Plugin 'othree/xml.vim'
+
+" Press t to toggle tagbar.
+Plugin 'majutsushi/tagbar'
+
+" gc to toggle comments
+Plugin 'tomtom/tcomment_vim'
+
+" Browse the file system
+Plugin 'scrooloose/nerdtree'
+
+" Track the engine.
+Plugin 'SirVer/ultisnips'
+
+" Fuzzy search
+Plugin 'kien/ctrlp.vim'
+
+" Notes
+Plugin 'xolox/vim-notes'
+
+" Vim misc required by vim notes
+Plugin 'xolox/vim-misc'
+
+" Git plugin
+Plugin 'tpope/vim-fugitive'
+
+" Snippets are separated from the engine. Add this if you want them:
+Plugin 'honza/vim-snippets'
+
+" Skeltons for common filetypes
+Plugin 'noahfrederick/vim-skeleton'
+
+" Toggle between things like True/False
+Plugin 'AndrewRadev/switch.vim'
+
+" Navigate markers easily
+Plugin 'kshenoy/vim-signature'
+
+" PEP8 indentation for python
+Plugin 'hynek/vim-python-pep8-indent'
+
+" Better handling of (), [], etc
+Plugin 'jiangmiao/auto-pairs'
+
+" Move function arguments around easily.
+Plugin 'AndrewRadev/sideways.vim'
+
+Plugin 'itchyny/lightline.vim'
+
+" All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
 
+" YCM
+
+let g:ycm_complete_in_comments_and_strings=1
+let g:ycm_key_list_select_completion=['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion=['<C-p>', '<Up>']
+let g:ycm_autoclose_preview_window_after_completion = 1
+
+"This assumes your kernel directory has the word 'kernel'
+" if getcwd() =~ "kernel"
+let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+""
+" ---
 
 " Make VIM remember position in file after reopen
  if has("autocmd")
@@ -446,4 +484,86 @@ autocmd vimenter * NERDTree
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 map <C-n> :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+autocmd VimEnter * NERDTree | wincmd p
 
+autocmd Filetype c setlocal ts=8 sw=8 noexpandtab
+if exists('+colorcolumn')
+  set colorcolumn=81
+else
+    au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>81v.\+', -1)
+endif
+
+autocmd BufWritePre * %s/\s\+$//e
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => lightline
+" """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:lightline = {
+       \ 'colorscheme': 'wombat',
+       \ }
+
+let g:lightline = {
+    \ 'colorscheme': 'wombat',
+    \ 'active': {
+    \   'left': [ ['mode', 'paste'],
+    \             ['fugitive', 'readonly', 'filename', 'modified'] ],
+    \   'right': [ [ 'lineinfo'  ], ['percent']  ]
+    \ },
+    \ 'component': {
+    \   'readonly': '%{&filetype=="help"?"":&readonly?"🔒":""}',
+    \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
+    \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
+    \ },
+    \ 'component_visible_condition': {
+    \   'readonly': '(&filetype!="help"&& &readonly)',
+    \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
+    \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
+    \ },
+        \ 'separator': { 'left': ' ', 'right': ' '  },
+    \ 'subseparator': { 'left': ' ', 'right': ' '  }
+    \ }
+
+let g:indent_guides_auto_colors = 0
+hi IndentGuidesEven ctermbg=black
+hi IndentGuidesOdd ctermbg=darkgrey
+
+autocmd VimEnter * IndentGuidesEnable
+" Airline
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '>'
+
+"-------------------------------------------------------------------------------
+"" OmniCppCompletion plugin
+"-------------------------------------------------------------------------------
+"
+" Enable OmniCompletion
+" http://vim.wikia.com/wiki/Omni_completion
+filetype plugin on
+set omnifunc=syntaxcomplete#Complete
+
+" Configure menu behavior
+" http://vim.wikia.com/wiki/VimTip1386
+set completeopt=longest,menuone
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
+\ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+inoremap <expr> <M-,> pumvisible() ? '<C-n>' :
+  \ '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+
+" Use Ctrl+Space for omni-completion
+" http://stackoverflow.com/questions/510503/ctrlspace-for-omni-and-keyword-completion-in-vim
+inoremap <expr> <C-Space> pumvisible() \|\| &omnifunc == '' ?
+\ "\<lt>C-n>" :
+\ "\<lt>C-x>\<lt>C-o><c-r>=pumvisible() ?" .
+\ "\"\\<lt>c-n>\\<lt>c-p>\\<lt>c-n>\" :" .
+\ "\" \\<lt>bs>\\<lt>C-n>\"\<CR>"
+imap <C-@> <C-Space>
+
+" Popup menu hightLight Group
+highlight Pmenu ctermbg=13 guibg=LightGray
+highlight PmenuSel ctermbg=7 guibg=DarkBlue guifg=White
+highlight PmenuSbar ctermbg=7 guibg=DarkGray
+highlight PmenuThumb guibg=Black
+
+
+let g:clang_library_path='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libclang.dylib'

@@ -6,8 +6,6 @@ export ZSH=/Users/howonbyun/.oh-my-zsh
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 ZSH_THEME="powerlevel9k/powerlevel9k"
-# ZSH_THEME="agnoster"
-
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
@@ -28,7 +26,7 @@ ZSH_THEME="powerlevel9k/powerlevel9k"
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 # COMPLETION_WAITING_DOTS="true"
@@ -41,7 +39,7 @@ ZSH_THEME="powerlevel9k/powerlevel9k"
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
 # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# HIST_STAMPS="mm/dd/yyyy"
+HIST_STAMPS="mm/dd/yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
@@ -59,29 +57,34 @@ export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin"
 
 source $ZSH/oh-my-zsh.sh
 
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+# Set variables in .zshrc file
 
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+# don't forget to change your path correctly!
 
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
+export GOPATH=$HOME/golang
+export GOROOT=/usr/local/opt/go/libexec
+export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:$GOROOT/bin
+export PATH=/Users/howonbyun/golang/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:/Users/howonbyun/golang/bin:/usr/local/opt/go/libexec/bin:/usr/local/go/bin
+export GOROOT=/Users/howonbyun/go
+export PATH=/Library/Frameworks/Mono.framework/Versions/Current/bin/:/Library/Frameworks/Mono.framework/Versions/Current/bin/:/Users/howonbyun/golang/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:/Users/howonbyun/golang/bin:/usr/local/opt/go/libexec/bin:/usr/local/go/bin
+alias smb='gcloud compute --project "planar-contact-145007" ssh --zone "us-east1-d" "instance-1"'
 
-# ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
+export PATH="~/.yarn/bin:$PATH"
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-#
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f /Users/howonbyun/google-cloud-sdk/path.zsh.inc ]; then
+  source '/Users/howonbyun/google-cloud-sdk/path.zsh.inc'
+fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f /Users/howonbyun/google-cloud-sdk/completion.zsh.inc ]; then
+  source '/Users/howonbyun/google-cloud-sdk/completion.zsh.inc'
+fi
+
+alias school='cd ~/Desktop/School'
 alias vim="/usr/local/Cellar/vim/7.4.979/bin/vim"
+
+# OPAM configuration
+. /Users/howonbyun/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+alias lli='/usr/local/opt/llvm/bin/lli'
