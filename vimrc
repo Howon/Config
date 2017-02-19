@@ -488,7 +488,7 @@ autocmd VimEnter * NERDTree | wincmd p
 
 autocmd Filetype c setlocal ts=8 sw=8 noexpandtab
 if exists('+colorcolumn')
-  set colorcolumn=81
+  set colorcolumn=120
 else
     au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>81v.\+', -1)
 endif
