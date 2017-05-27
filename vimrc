@@ -38,6 +38,7 @@ source $VIMRUNTIME/menu.vim
 
 " Turn on the WiLd menu
 set wildmenu
+set wildmode=list:longest,full
 
 " Ignore compiled files
 set wildignore=*.o,*~,*.pyc
@@ -457,6 +458,8 @@ Plugin 'AndrewRadev/sideways.vim'
 
 Plugin 'itchyny/lightline.vim'
 
+Plugin 'flazz/vim-colorschemes'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -567,3 +570,4 @@ highlight PmenuThumb guibg=Black
 
 
 let g:clang_library_path='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libclang.dylib'
+
