@@ -138,8 +138,8 @@ set noswapfile
 " Be smart when using tabs ;)
 set smarttab
 
-" 1 tab == 4 spaces
-set shiftwidth=8
+" 1 tab == 2 spaces
+set shiftwidth=2
 
 " Linebreak on 500 characters
 set lbr
@@ -377,7 +377,6 @@ call plug#begin('~/.vim/plugged')
 " "call vundle#begin('~/some/path/here')
 "
 " " let Vundle manage Vundle, required
-Plug 'VundleVim/Vundle.vim'
 
 " Cool statusbar
 Plug 'vim-airline/vim-airline'
@@ -440,6 +439,8 @@ Plug 'itchyny/lightline.vim'
 Plug 'flazz/vim-colorschemes'
 
 Plug 'nathanaelkane/vim-indent-guides'
+
+Plug 'Valloric/YouCompleteMe'
 
 " All of your Plugins must be added before the following line
 call plug#end()
@@ -536,3 +537,15 @@ highlight Pmenu ctermbg=13 guibg=LightGray
 highlight PmenuSel ctermbg=7 guibg=DarkBlue guifg=White
 highlight PmenuSbar ctermbg=7 guibg=DarkGray
 highlight PmenuThumb guibg=Black
+
+
+let g:ycm_semantic_triggers =  {
+  \   'c' : ['->', '.'],
+  \   'objc' : ['->', '.'],
+  \   'cpp,objcpp' : ['->', '.', '::'],
+  \   'perl' : ['->'],
+  \   'php' : ['->', '::'],
+  \   'cs,java,javascript,d,vim,ruby,python,perl6,scala,vb,elixir,go' : ['.'],
+  \   'lua' : ['.', ':'],
+  \   'erlang' : [':'],
+  \ }
