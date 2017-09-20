@@ -134,15 +134,12 @@ set noswapfile
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text, tab and indent related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Use spaces instead of tabs
-set expandtab
 
 " Be smart when using tabs ;)
 set smarttab
 
 " 1 tab == 4 spaces
-set shiftwidth=2
-set tabstop=2
+set shiftwidth=8
 
 " Linebreak on 500 characters
 set lbr
@@ -246,16 +243,6 @@ if has("mac") || has("macunix")
   vmap <D-j> <M-j>
   vmap <D-k> <M-k>
 endif
-
-" Delete trailing white space on save, useful for Python and CoffeeScript ;)
-func! DeleteTrailingWS()
-  exe "normal mz"
-  %s/\s\+$//ge
-  exe "normal `z"
-endfunc
-autocmd BufWrite *.py :call DeleteTrailingWS()
-autocmd BufWrite *.coffee :call DeleteTrailingWS()
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Ag searching and cope displaying
@@ -377,105 +364,87 @@ endfunction
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+call plug#begin('~/.vim/plugged')
 " " alternatively, pass a path where Vundle should install plugins
 " "call vundle#begin('~/some/path/here')
 "
 " " let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-"
-" The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
-" plugin on GitHub repo
-Plugin 'Valloric/YouCompleteMe'
+Plug 'VundleVim/Vundle.vim'
 
 " Cool statusbar
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-
-" Plugin to generate bash prompt line
-Bundle 'edkolev/promptline.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 " Automatic ctags cleanup on file writes. This plugin searches parent
 " directories for any .tags files and removes stale tags.
-Plugin 'craigemery/vim-autotag'
-
-" Scroll through color schemes
-Plugin 'ScrollColors'
+Plug 'craigemery/vim-autotag'
 
 " Syntax checking
-Plugin 'scrooloose/syntastic'
+Plug 'scrooloose/syntastic'
 
 " Convenient completion for XML/HTML
-Plugin 'othree/xml.vim'
+Plug 'othree/xml.vim'
 
 " Press t to toggle tagbar.
-Plugin 'majutsushi/tagbar'
+Plug 'majutsushi/tagbar'
 
 " gc to toggle comments
-Plugin 'tomtom/tcomment_vim'
+Plug 'tomtom/tcomment_vim'
 
 " Browse the file system
-Plugin 'scrooloose/nerdtree'
-
-" Track the engine.
-Plugin 'SirVer/ultisnips'
+Plug 'scrooloose/nerdtree'
 
 " Fuzzy search
-Plugin 'kien/ctrlp.vim'
+Plug 'kien/ctrlp.vim'
 
 " Notes
-Plugin 'xolox/vim-notes'
+Plug 'xolox/vim-notes'
 
 " Vim misc required by vim notes
-Plugin 'xolox/vim-misc'
+Plug 'xolox/vim-misc'
 
 " Git plugin
-Plugin 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'
 
 " Snippets are separated from the engine. Add this if you want them:
-Plugin 'honza/vim-snippets'
+Plug 'honza/vim-snippets'
 
 " Skeltons for common filetypes
-Plugin 'noahfrederick/vim-skeleton'
+Plug 'noahfrederick/vim-skeleton'
 
 " Toggle between things like True/False
-Plugin 'AndrewRadev/switch.vim'
+Plug 'AndrewRadev/switch.vim'
 
 " Navigate markers easily
-Plugin 'kshenoy/vim-signature'
+Plug 'kshenoy/vim-signature'
 
 " PEP8 indentation for python
-Plugin 'hynek/vim-python-pep8-indent'
+Plug 'hynek/vim-python-pep8-indent'
 
 " Better handling of (), [], etc
-Plugin 'jiangmiao/auto-pairs'
+Plug 'jiangmiao/auto-pairs'
 
 " Move function arguments around easily.
-Plugin 'AndrewRadev/sideways.vim'
+Plug 'AndrewRadev/sideways.vim'
 
-Plugin 'itchyny/lightline.vim'
+Plug 'itchyny/lightline.vim'
 
-Plugin 'flazz/vim-colorschemes'
+Plug 'flazz/vim-colorschemes'
+
+Plug 'nathanaelkane/vim-indent-guides'
 
 " All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
+call plug#end()
 
-" YCM
-
-let g:ycm_complete_in_comments_and_strings=1
-let g:ycm_key_list_select_completion=['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion=['<C-p>', '<Up>']
-let g:ycm_autoclose_preview_window_after_completion = 1
-
-"This assumes your kernel directory has the word 'kernel'
-" if getcwd() =~ "kernel"
-let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
-""
-" ---
+filetype plugin indent on
 
 " Make VIM remember position in file after reopen
  if has("autocmd")
@@ -491,7 +460,7 @@ autocmd VimEnter * NERDTree | wincmd p
 
 autocmd Filetype c setlocal ts=8 sw=8 noexpandtab
 if exists('+colorcolumn')
-  set colorcolumn=120
+  set colorcolumn=81
 else
     au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>81v.\+', -1)
 endif
@@ -567,7 +536,3 @@ highlight Pmenu ctermbg=13 guibg=LightGray
 highlight PmenuSel ctermbg=7 guibg=DarkBlue guifg=White
 highlight PmenuSbar ctermbg=7 guibg=DarkGray
 highlight PmenuThumb guibg=Black
-
-
-let g:clang_library_path='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libclang.dylib'
-
