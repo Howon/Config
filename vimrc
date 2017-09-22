@@ -1,6 +1,6 @@
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General settings.
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Sets how many lines of history VIM has to remember
 set history=1000
 
@@ -163,7 +163,7 @@ elseif has("unix")
 endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Helper functions
+" Helper functions
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Type !<exec> to launch shell commands
 " eg: !pwd
@@ -201,16 +201,18 @@ let g:lightline = {
     \ 'colorscheme': 'wombat',
     \ 'active': {
     \   'left': [ ['mode', 'paste'],
-    \             ['gitbranch', 'readonly', 'filename', 'modified'] ],
+    \             ['gitbranch', 'fugitive', 'readonly', 'filename', 'modified'] ],
     \   'right': [ [ 'lineinfo'  ], ['percent']  ]
     \ },
     \ 'component': {
     \   'readonly': '%{&filetype=="help"?"":&readonly?"🔒":""}',
-    \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}'
+    \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
+    \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
     \ },
     \ 'component_visible_condition': {
     \   'readonly': '(&filetype!="help"&& &readonly)',
     \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
+    \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
     \ },
         \ 'separator': { 'left': ' ', 'right': ' '  },
     \ 'subseparator': { 'left': ' ', 'right': ' '  }
@@ -259,7 +261,7 @@ highlight PmenuSbar ctermbg=7 guibg=DarkGray
 highlight PmenuThumb guibg=Black
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" YCM settings.
+" YCM settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:ycm_semantic_triggers =  {
   \   'c' : ['->', '.'],
@@ -278,6 +280,20 @@ let g:ycm_key_list_previous_completion=['<C-p>', '<Up>']
 let g:ycm_autoclose_preview_window_after_completion = 1
 
 let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Ctrl-P
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/](\.(git|hg|svn)|\_site)$',
+  \ 'file': '\v\.(exe|so|dll|class|png|jpg|jpeg)$',
+\}
+
+" Use the nearest .git|.svn|.hg|.bzr directory as the cwd
+let g:ctrlp_working_path_mode = 'r'
+
+" enter file search mode
+nmap <leader>p :CtrlP<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Key Remapping
@@ -411,12 +427,6 @@ Plug 'scrooloose/nerdtree'
 " Fuzzy search
 Plug 'kien/ctrlp.vim'
 
-" Notes
-Plug 'xolox/vim-notes'
-
-" Vim misc required by vim notes
-Plug 'xolox/vim-misc'
-
 " Git plugin
 Plug 'tpope/vim-fugitive'
 
@@ -425,12 +435,6 @@ Plug 'honza/vim-snippets'
 
 " Skeltons for common filetypes
 Plug 'noahfrederick/vim-skeleton'
-
-" Toggle between things like True/False
-Plug 'AndrewRadev/switch.vim'
-
-" Navigate markers easily
-Plug 'kshenoy/vim-signature'
 
 " PEP8 indentation for python
 Plug 'hynek/vim-python-pep8-indent'
@@ -449,6 +453,9 @@ Plug 'nathanaelkane/vim-indent-guides'
 
 " YCM
 Plug 'Valloric/YouCompleteMe'
+
+" Ctrlp
+Plug 'kien/ctrlp.vim'
 
 " All of your Plugins must be added before the following line
 call plug#end()
