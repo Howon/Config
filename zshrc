@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/howonbyun/.oh-my-zsh
+export ZSH=/home/howon/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -61,32 +61,19 @@ source $ZSH/oh-my-zsh.sh
 
 # don't forget to change your path correctly!
 
-export GOPATH=$HOME/golang
-export GOROOT=/usr/local/opt/go/libexec
-export PATH=$PATH:$GOPATH/bin
-export PATH=$PATH:$GOROOT/bin
-export PATH=/Users/howonbyun/golang/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:/Users/howonbyun/golang/bin:/usr/local/opt/go/libexec/bin:/usr/local/go/bin
-export GOROOT=/Users/howonbyun/go
-export PATH=/Library/Frameworks/Mono.framework/Versions/Current/bin/:/Library/Frameworks/Mono.framework/Versions/Current/bin/:/Users/howonbyun/golang/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:/Users/howonbyun/golang/bin:/usr/local/opt/go/libexec/bin:/usr/local/go/bin
-alias smb='gcloud compute --project "planar-contact-145007" ssh --zone "us-east1-d" "instance-1"'
-
 export PATH="~/.yarn/bin:$PATH"
+export PATH=$PATH:/usr/local/go/bin
+export PATH=/usr/local/cuda-9.0/bin${PATH:+:${PATH}}
+export LD_LIBRARY_PATH=/usr/local/cuda-9.0/lib64
+export GOPATH=$HOME/Desktop/school/distributed/
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f /Users/howonbyun/google-cloud-sdk/path.zsh.inc ]; then
-  source '/Users/howonbyun/google-cloud-sdk/path.zsh.inc'
-fi
 
-# The next line enables shell command completion for gcloud.
-if [ -f /Users/howonbyun/google-cloud-sdk/completion.zsh.inc ]; then
-  source '/Users/howonbyun/google-cloud-sdk/completion.zsh.inc'
-fi
-
-alias school='cd ~/Desktop/School'
-alias vim="/usr/local/Cellar/vim/7.4.979/bin/vim"
+export NVM_DIR="/home/howon/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 # OPAM configuration
 . /Users/howonbyun/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 alias lli='/usr/local/opt/llvm/bin/lli'
 alias htop='sudo htop'
 export PATH=$HOME/.cabal/bin:$PATH
+source $HOME/.cargo/env
