@@ -88,3 +88,5 @@ alias vim="/usr/local/Cellar/vim/7.4.979/bin/vim"
 # OPAM configuration
 . /Users/howonbyun/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 alias lli='/usr/local/opt/llvm/bin/lli'
+alias htop='sudo htop'
+export PATH=$HOME/.cabal/bin:$PATH
