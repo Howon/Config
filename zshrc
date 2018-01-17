@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/home/howon/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -67,13 +67,7 @@ export PATH=/usr/local/cuda-9.0/bin${PATH:+:${PATH}}
 export LD_LIBRARY_PATH=/usr/local/cuda-9.0/lib64
 export GOPATH=$HOME/Desktop/school/distributed/
 
-
-export NVM_DIR="/home/howon/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-
-# OPAM configuration
-. /Users/howonbyun/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
-alias lli='/usr/local/opt/llvm/bin/lli'
-alias htop='sudo htop'
-export PATH=$HOME/.cabal/bin:$PATH
-source $HOME/.cargo/env
+bindkey "[D" backward-word
+bindkey "[C" forward-word
+bindkey "^[a" beginning-of-line
+bindkey "^[e" end-of-line
