@@ -30,6 +30,8 @@ set ai "Auto indent
 set si "Smart indent
 set wrap "Wrap lines
 
+set mouse=a
+
 " Set 7 lines to the cursor - when moving vertically using j/k
 set so=7
 
